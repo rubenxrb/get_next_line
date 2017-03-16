@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <unistd.h>
+#include "libft.h"
+#include <unistd.h> //read()
 
 t_file	*new_file(const int fd)
 {
