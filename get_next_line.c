@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h> //read()
+#include <unistd.h>
 
 t_file	*new_file(const int fd)
 {
