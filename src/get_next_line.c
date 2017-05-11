@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <unistd.h>
 
 void	read_buf(char *b, t_file *file, long r)
 {
