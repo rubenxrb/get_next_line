@@ -80,10 +80,10 @@ int		get_next_line(const int fd, char **line)
 	while (node)
 	{
 		if (((t_file *)node->data)->fd == fd)
-			return (read_next_line(line, node->data);
+			return (read_next_line(line, node->data));
 		node = node->next;
 	}
-	new = ft_memalloc(&c_file, sizeof(t_node));
+	new = ft_lstnew(&c_file, sizeof(t_file));
 	ft_lstadd(&file_lst, new);
 	return (read_next_line(line, new->data));
 }
