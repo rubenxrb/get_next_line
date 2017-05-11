@@ -13,18 +13,6 @@
 #include "libft.h"
 #include <unistd.h>
 
-t_file	*new_file(const int fd)
-{
-	t_file	*file;
-
-	if (!(file = (t_file *)ft_memalloc(sizeof(t_file) + 1)))
-		return (0);
-	(*file).fd = fd;
-	file->tmp = 0;
-	file->l_len = 0;
-	return (file);
-}
-
 void	read_buf(char *b, t_file *file, long r)
 {
 	size_t		l_size;
@@ -61,8 +49,7 @@ int		read_next_line(char **line, t_file *file)
 	{
 		if (file->tmp && *file->tmp)
 		{
-			if (*file->tmp)
-				(void)ft_strcat(buf, file->tmp);
+			ft_strcat(buf, file->tmp);
 			ft_strdel(&file->tmp);
 			file->tmp = 0;
 		}
@@ -81,22 +68,22 @@ int		get_next_line(const int fd, char **line)
 	static t_node	*file_lst;
 	t_node			*node;
 	t_node			*new;
-	t_file			*c_file;
+	t_file			c_file;
 
 	if (fd < 0 || !line)
 		return (-1);
+	ft_bzero(&c_file, sizeof(t_file));
+	c_file.fd = fd;
 	if (!file_lst)
-		file_lst = ft_lstnew((void *)new_file(fd), sizeof(t_file));
-	node = (t_node *)file_lst;
-	c_file = 0;
-	while ((node) && (c_file = node->data))
+		file_lst = ft_lstnew(&c_file, sizeof(t_file));
+	node = file_lst;
+	while (node)
 	{
-		if (c_file->fd == fd)
-			return (read_next_line(line, c_file));
+		if (((t_file *)node->data)->fd == fd)
+			return (read_next_line(line, node->data);
 		node = node->next;
 	}
-	new = (t_node *)ft_memalloc(sizeof(t_node));
-	new->data = (t_file *)new_file(fd);
-	(void)ft_lstadd(&file_lst, new);
-	return (read_next_line(line, (t_file *)new->data));
+	new = ft_memalloc(&c_file, sizeof(t_node));
+	ft_lstadd(&file_lst, new);
+	return (read_next_line(line, new->data));
 }
