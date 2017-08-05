@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 #include <unistd.h>
 
 void	read_buf(char *b, t_file *file, long r)
@@ -65,9 +65,9 @@ int		read_next_line(char **line, t_file *file)
 
 int		get_next_line(const int fd, char **line)
 {
-	static t_node	*file_lst;
-	t_node			*node;
-	t_node			*new;
+	static t_slln	*file_lst;
+	t_slln			*node;
+	t_slln			*new;
 	t_file			c_file;
 
 	if (fd < 0 || !line)
